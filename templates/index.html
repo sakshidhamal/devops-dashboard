@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DevOps Server Dashboard</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<h1>Server Health Dashboard</h1>
+
+<div class="container">
+
+<div class="card">
+<h2>CPU Usage</h2>
+<p id="cpu">Loading...</p>
+</div>
+
+<div class="card">
+<h2>Memory Usage</h2>
+<p id="memory">Loading...</p>
+</div>
+
+<div class="card">
+<h2>Disk Usage</h2>
+<p id="disk">Loading...</p>
+</div>
+
+</div>
+
+<button onclick="loadStats()">Refresh</button>
+
+<script>
+
+async function loadStats(){
+let res = await fetch('/stats')
+let data = await res.json()
+
+document.getElementById("cpu").innerText = data.cpu + "%"
+document.getElementById("memory").innerText = data.memory + "%"
+document.getElementById("disk").innerText = data.disk + "%"
+}
+
+loadStats()
+
+</script>
+
+</body>
+</html>
